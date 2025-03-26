@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>USCO Robotics Academy</title>
+    <!-- FontAwesome for Social Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Lato", sans-serif;
+      }
+
+      body {
+        background: #fff;
+        color: #1f2937;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Navigation */
+      nav {
+        background-color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 1.5rem;
+        border-bottom: 1px solid #e0e0e8;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo img {
+        width: 80px;
+        border-radius: 8px;
+      }
+
+      .nav-list {
+        list-style: none;
+        display: flex;
+        gap: 2.5rem;
+      }
+
+      .nav-item {
+        position: relative;
+      }
+
+      .nav-item a {
+        color: #77129f;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .nav-item:hover a {
+        transform: scale(1.1);
+        color: #9b3dc4;
+      }
+
+      .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        border: 1px solid #77129f;
+        border-radius: 8px;
+        min-width: 220px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-item:hover .dropdown {
+        display: block;
+      }
+
+      .dropdown li {
+        list-style: none;
+      }
+
+      .dropdown a {
+        color: #1f2937;
+        padding: 0.75rem 1.25rem;
+        display: block;
+        transition: all 0.3s ease;
+      }
+
+      .dropdown a:hover {
+        color: #fff;
+        background: #77129f;
+        border-radius: 6px;
+      }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        height: 500px;
+        text-align: center;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #77129f;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        opacity: 0.85;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+      }
+
+      .hero .content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .cta {
+        background: transparent;
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 0.9rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .cta:hover {
+        background: #9b3dc4;
+        border-color: #9b3dc4;
+        transform: scale(1.05);
+      }
+
+      /* Stats */
+      .stats {
+        background: #f9f9fb; /* Subtle off-white */
+        padding: 6rem 2rem;
+        text-align: center;
+        max-width: 1200px;
+        margin: 2rem auto;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .stats h2 {
+        color: #77129f;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2.5rem;
+        justify-content: center;
+      }
+
+      .stat-item {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+      }
+
+      .stat-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .stat-item .counter {
+        font-size: 2.8rem;
+        color: #77129f;
+        font-weight: bold;
+      }
+
+      .stat-item p {
+        color: #1f2937;
+        font-size: 1.1rem;
+      }
+
+      /* News Ticker */
+      .news-ticker {
+        background: #77129f;
+        color: #fff;
+        padding: 0.75rem;
+        overflow: hidden;
+        white-space: nowrap;
+        border-radius: 12px;
+        max-width: 1200px;
+        margin: 0 auto 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .news-ticker span {
+        display: inline-block;
+        animation: scroll 5s linear infinite;
+        font-size: 1.1rem;
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      /* Courses */
+      .courses {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 0 2rem;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .courses h2 {
+        color: #77129f;
+        text-align: center;
+        font-size: 2.2rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .course-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2.5rem;
+      }
+
+      .course-card {
+        background: #f9f9fb; /* Subtle off-white */
+        border: 1px solid #77129f;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .course-card:hover {
+        box-shadow: 0 6px 16px rgba(119, 18, 159, 0.15);
+        transform: translateY(-8px) scale(1.03);
+      }
+
+      .course-card h3 {
+        color: #77129f;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .course-card p {
+        color: #1f2937;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .course-card button {
+        background: #77129f;
+        color: #fff;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .course-card button:hover {
+        transform: scale(1.05);
+        background: #9b3dc4;
+      }
+
+      /* Code Playground */
+      .code-playground {
+        margin-top: 2rem;
+        text-align: left;
+      }
+
+      .code-playground textarea {
+        width: 100%;
+        height: 120px;
+        background: #fff;
+        border: 1px solid #77129f;
+        border-radius: 8px;
+        padding: 1rem;
+        resize: none;
+        font-family: monospace;
+        color: #1f2937;
+      }
+
+      .code-playground button {
+        margin-top: 1rem;
+        background: #77129f;
+        color: #fff;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+        border-radius: 10px;
+        font-weight: 600;
+      }
+
+      #code-output {
+        margin-top: 1rem;
+        color: #77129f;
+        font-family: monospace;
+        font-size: 1rem;
+      }
+
+      /* Projects */
+      .projects {
+        background: #f9f9fb; /* Subtle off-white */
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto 4rem;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .projects h2 {
+        color: #77129f;
+        text-align: center;
+        font-size: 2.2rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+      }
+
+      .project-card {
+        border: 1px solid #77129f;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .project-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 16px rgba(119, 18, 159, 0.15);
+      }
+
+      .project-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 1px solid #e0e0e8;
+      }
+
+      .project-card div {
+        padding: 1.5rem;
+      }
+
+      .project-card h3 {
+        color: #77129f;
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .project-card p {
+        color: #1f2937;
+        font-size: 1rem;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        background: #fff;
+        padding: 4rem 2rem;
+        text-align: center;
+        border-radius: 20px;
+        max-width: 1200px;
+        margin: 0 auto 4rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .testimonials h2 {
+        color: #77129f;
+        font-size: 2.2rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+      }
+
+      .testimonial-card {
+        background: #f9f9fb; /* Subtle off-white */
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-8px);
+      }
+
+      .testimonial-card p {
+        font-style: italic;
+        color: #1f2937;
+        font-size: 1.1rem;
+      }
+
+      .testimonial-card span {
+        color: #77129f;
+        font-weight: bold;
+        font-size: 1rem;
+        display: block;
+        margin-top: 1rem;
+      }
+
+      /* Partners */
+      .partners {
+        padding: 4rem 2rem;
+        text-align: center;
+        background: #f9f9fb; /* Subtle off-white */
+        border-radius: 20px;
+        max-width: 1200px;
+        margin: 0 auto 4rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .partners h2 {
+        color: #77129f;
+        font-size: 2.2rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .partner-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.5rem;
+      }
+
+      .partner-logo {
+        width: 160px;
+        filter: grayscale(100%);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .partner-logo:hover {
+        filter: none;
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(119, 18, 159, 0.2);
+      }
+
+      /* Footer */
+      footer {
+        background: #77129f;
+        color: #fff;
+        padding: 3rem 2rem;
+        text-align: center;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .footer-links {
+        margin-bottom: 1.5rem;
+      }
+
+      .footer-links a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        transform: scale(1.1);
+      }
+
+      .social-icons a {
+        color: #fff;
+        font-size: 1.8rem;
+        margin: 0 1rem;
+        transition: transform 0.3s ease;
+      }
+
+      .social-icons a:hover {
+        transform: scale(1.2);
+      }
+
+      footer p {
+        font-size: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      /* Chatbot Button */
+      .chatbot-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #77129f;
+        color: #fff;
+        border: none;
+        padding: 1.2rem;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 101;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+      }
+
+      .chatbot-btn:hover {
+        transform: scale(1.1);
+        background: #9b3dc4;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-list {
+          display: none;
+        }
+        .nav-container.active .nav-list {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: #77129f;
+          padding: 1.5rem;
+          border-radius: 0 0 12px 12px;
+        }
+        .nav-container.active .nav-item a {
+          color: #fff;
+        }
+        .hamburger {
+          display: block;
+          color: #77129f;
+          font-size: 1.8rem;
+          cursor: pointer;
+        }
+        .hero {
+          height: 400px;
+        }
+        .hero h1 {
+          font-size: 2rem;
+        }
+        .hero p {
+          font-size: 1.1rem;
+        }
+        .cta {
+          padding: 0.75rem 1.5rem;
+          font-size: 1rem;
+        }
+        .stats h2,
+        .courses h2,
+        .projects h2,
+        .testimonials h2,
+        .partners h2 {
+          font-size: 1.8rem;
+        }
+        .stat-item .counter {
+          font-size: 2.2rem;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .hamburger {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">
+          <img
+            src="images/usco-logo-768x768.png"
+            alt="USCO Robotics Academy Logo"
+            width="80px"
+          />
+        </div>
+        <span class="hamburger">☰</span>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#">Home</a></li>
+          <li class="nav-item">
+            <a href="#">Courses</a>
+            <ul class="dropdown">
+              <li><a href="#">School of Web Development</a></li>
+              <li><a href="#">School of Cybersecurity</a></li>
+              <li><a href="#">School of AI and Robotics</a></li>
+              <li><a href="#">School of Data Science and Analysis</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="#">Projects</a></li>
+          <li class="nav-item"><a href="#">Shop</a></li>
+          <li class="nav-item"><a href="#">About</a></li>
+          <li class="nav-item"><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <img
+        src="images/group-multinational-busy-people-working-office.jpg"
+        alt="Robotics Lab"
+      />
+      <div class="content">
+        <h1>Lead the Robotics Revolution</h1>
+        <p>
+          Empower yourself with skills for tomorrow at USCO Robotics Academy.
+        </p>
+        <button class="cta">Get Started</button>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+      <h2>Our Impact</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="counter" id="graduates">0</div>
+          <p>Students Graduated</p>
+        </div>
+        <div class="stat-item">
+          <div class="counter" id="projects">0</div>
+          <p>Projects Completed</p>
+        </div>
+        <div class="stat-item">
+          <div class="counter" id="partners">0</div>
+          <p>Industry Partners</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Ticker -->
+    <div class="news-ticker">
+      <span
+        >Latest: USCO Robotics wins 2025 Innovation Award | New AI Course starts
+        April! | Join our Web Dev classes this may!</span
+      >
+    </div>
+
+    <!-- Courses -->
+    <section class="courses">
+      <h2>Our Programs</h2>
+      <div class="course-grid">
+        <div class="course-card">
+          <h3>Web Development</h3>
+          <p>Build modern websites with HTML, CSS, and JS.</p>
+          <button>Enroll Now</button>
+        </div>
+        <div class="course-card">
+          <h3>Cybersecurity</h3>
+          <p>Protect systems from digital threats.</p>
+          <button>Enroll Now</button>
+        </div>
+        <div class="course-card">
+          <h3>AI & Robotics</h3>
+          <p>Create intelligent machines that change lives.</p>
+          <button>Enroll Now</button>
+          <div class="code-playground">
+            <textarea
+              id="code"
+              placeholder="Try this: console.log('Hello Robotics');"
+            ></textarea>
+            <button onclick="runCode()">Run Code</button>
+            <div id="code-output"></div>
+          </div>
+        </div>
+        <div class="course-card">
+          <h3>Data Science</h3>
+          <p>Unlock insights with data analysis.</p>
+          <button>Enroll Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="projects">
+      <h2>Our Innovations</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <img
+            src="https://via.placeholder.com/300x200?text=AKA+Prosthetic"
+            alt="AKA Prosthetic"
+          />
+          <div>
+            <h3>AKA Prosthetic Arm</h3>
+            <p>Affordable robotics for amputees.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <img
+            src="https://via.placeholder.com/300x200?text=AI+Drone"
+            alt="AI Drone"
+          />
+          <div>
+            <h3>AI-Powered Drone</h3>
+            <p>Autonomous flight for agriculture.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <img
+            src="https://via.placeholder.com/300x200?text=Smart+Irrigation"
+            alt="Smart Irrigation"
+          />
+          <div>
+            <h3>Smart Irrigation</h3>
+            <p>Water-saving tech for farmers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <h2>What Our Community Says</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p>"USCO gave me the skills to launch my startup."</p>
+          <span>- Ade, Web Dev Graduate</span>
+        </div>
+        <div class="testimonial-card">
+          <p>"The robotics program opened doors I never imagined."</p>
+          <span>- Chioma, Robotics Engineer</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners">
+      <h2>Our Partners</h2>
+      <div class="partner-grid">
+        <img
+          class="partner-logo"
+          src="https://via.placeholder.com/150?text=Partner+1"
+          alt="Partner 1"
+        />
+        <img
+          class="partner-logo"
+          src="https://via.placeholder.com/150?text=Partner+2"
+          alt="Partner 2"
+        />
+        <img
+          class="partner-logo"
+          src="https://via.placeholder.com/150?text=Partner+3"
+          alt="Partner 3"
+        />
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-links">
+        <a href="#">Courses</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Shop</a>
+      </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p>Innovating Africa’s Future © 2025 USCO Robotics</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Chatbot Simulation
+      function openChatbot() {
+        alert(
+          "Hello! I'm your AI assistant. How can I help you with robotics today?"
+        );
+      }
+
+      // GSAP Animations
+      gsap.from("nav", {
+        y: -100,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+      });
+
+      gsap.from(".hero img", {
+        scale: 1.1,
+        opacity: 0,
+        duration: 1.5,
+        ease: "back.out(1.7)",
+      });
+
+      gsap.from(".hero h1", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: "power3.out",
+      });
+
+      gsap.from(".hero p", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.7,
+        ease: "power3.out",
+      });
+
+      gsap.from(".stats h2", {
+        y: -50,
+        opacity: 0,
+        duration: 1,
+        delay: 1.2,
+        ease: "power2.out",
+      });
+
+      gsap.from(".stat-item", {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        delay: 1.4,
+        ease: "power3.out",
+      });
+
+      // Counter Animation
+      function animateCounter(id, start, end, duration) {
+        let obj = document.getElementById(id);
+        let current = start;
+        let range = end - start;
+        let increment = end > start ? 1 : -1;
+        let step = Math.abs(Math.floor(duration / range));
+        let timer = setInterval(() => {
+          current += increment;
+          obj.textContent = current + "+";
+          if (current == end) {
+            clearInterval(timer);
+          }
+        }, step);
+      }
+
+      window.onload = () => {
+        animateCounter("graduates", 0, 150, 2000);
+        animateCounter("projects", 0, 50, 2000);
+        animateCounter("partners", 0, 10, 2000);
+      };
+
+      // Hamburger Menu Toggle
+      document.querySelector(".hamburger").addEventListener("click", () => {
+        document.querySelector(".nav-container").classList.toggle("active");
+      });
+
+      // Code Playground
+      function runCode() {
+        const code = document.getElementById("code").value;
+        const output = document.getElementById("code-output");
+        try {
+          const result = eval(code);
+          output.textContent = result || "Code executed successfully!";
+        } catch (e) {
+          output.textContent = "Error: " + e.message;
+        }
+      }
+    </script>
+  </body>
+</html>
