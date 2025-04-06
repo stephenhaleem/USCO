@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Anton&family=Black+Ops+One&display=swap");
+    </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tech Academy</title>
@@ -14,17 +17,27 @@
     <header>
       <nav>
         <div class="nav-logo">
-          <img src="images/usco-logo-768x768.png" alt="Tech Academy Logo" />
+          <img
+            src="images/usco-logo-768x768.png"
+            alt="Tech Academy Logo"
+            style="width: 60px"
+          />
         </div>
-        <ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="nav-links">
           <li><a href="#home">Home</a></li>
-          <li><a href="#courses">Courses</a></li>
+          <li><a href="#schools">Courses</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="PROJECT.HTML">Projects</a></li>
+          <li><a href="projects.html">Projects</a></li>
           <li><a href="schools.html">Schools</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="blog.html">Blog</a></li>
         </ul>
+        <div class="close-btn">×</div>
       </nav>
     </header>
 
@@ -32,34 +45,37 @@
       <!-- Home Section -->
       <section id="home" class="hero">
         <div class="hero-content animate-fade-in">
-          <h2>We Shape the Future of Tech</h2>
-          <p>Empowering learners with skills for tomorrow’s innovations.</p>
+          <h1>Shape the Future of Tech</h1>
+          <p>Join Tech Academy to unlock skills for tomorrow’s innovations.</p>
+          <a href="#schools" class="btn hero-btn">Discover Our Schools</a>
         </div>
       </section>
 
       <!-- Stats Section -->
-      <section class="stats stats-rounded">
-        <div class="stat-card animate-fade-in">
-          <h3 class="counter" data-target="200">0</h3>
-          <p>Students Enrolled</p>
-        </div>
-        <div class="stat-card animate-fade-in">
-          <h3 class="counter" data-target="50">0</h3>
-          <p>Courses Offered</p>
-        </div>
-        <div class="stat-card animate-fade-in">
-          <h3 class="counter" data-target="100">0</h3>
-          <p>Projects Completed</p>
+      <section class="stats">
+        <div class="stats-container">
+          <div class="stat-card animate-fade-in">
+            <h3 class="counter" data-target="200">0</h3>
+            <p>Students Enrolled</p>
+          </div>
+          <div class="stat-card animate-fade-in">
+            <h3 class="counter" data-target="50">0</h3>
+            <p>Courses Offered</p>
+          </div>
+          <div class="stat-card animate-fade-in">
+            <h3 class="counter" data-target="100">0</h3>
+            <p>Projects Completed</p>
+          </div>
         </div>
       </section>
 
-      <!-- Courses Section -->
-      <section id="courses" class="schools">
+      <!-- Schools Section -->
+      <section id="schools" class="schools">
         <div class="section-header animate-fade-in">
           <h2>Our Schools</h2>
-          <p>Explore our specialized schools for every tech passion.</p>
+          <p>Explore specialized programs for every tech passion.</p>
         </div>
-        <div class="schools-list">
+        <div class="schools-grid">
           <div class="school-card animate-fade-in">
             <h3>School of Web Development</h3>
             <p>Master the art of building modern, responsive websites.</p>
@@ -85,34 +101,38 @@
 
       <!-- About Section -->
       <section id="about" class="about">
-        <div class="section-header animate-fade-in">
-          <h2>About Us</h2>
-          <p>Shaping the future of tech education since 2020.</p>
-        </div>
-        <div class="mission animate-fade-in">
-          <h3>Our Mission</h3>
-          <p>To empower learners with practical, cutting-edge tech skills.</p>
-        </div>
-        <div class="team">
-          <h3 class="animate-fade-in">Meet the Team</h3>
-          <div class="team-grid">
-            <div class="team-member animate-fade-in">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Jane Doe"
-                class="team-image"
-              />
-              <h4>Jane Doe</h4>
-              <p>Director - AI Expert</p>
-            </div>
-            <div class="team-member animate-fade-in">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="John Smith"
-                class="team-image"
-              />
-              <h4>John Smith</h4>
-              <p>Lead Instructor - Coding Guru</p>
+        <div class="about-content">
+          <div class="mission animate-fade-in">
+            <h3>
+              <span class="mission-top">OUR</span><br />
+              <span class="mission-main">MISSION</span><br />
+              <span class="mission-bottom"
+                >We empower learners with practical, cutting-edge tech skills to
+                shape t5a623he future.</span
+              >
+            </h3>
+          </div>
+          <div class="team animate-fade-in">
+            <h3>Meet the Team</h3>
+            <div class="team-grid">
+              <div class="team-member">
+                <img
+                  src="images/side-view-anime-style-man-portrait.webp"
+                  alt="Jane Doe"
+                  class="team-image"
+                />
+                <h4>Samuel Ufoeze</h4>
+                <p>Director</p>
+              </div>
+              <div class="team-member">
+                <img
+                  src="images/8689962.jpg"
+                  alt="John Smith"
+                  class="team-image"
+                />
+                <h4>Oghenetega Okekeri</h4>
+                <p>Lead Instructor</p>
+              </div>
             </div>
           </div>
         </div>
@@ -123,63 +143,111 @@
         <div class="section-header animate-fade-in">
           <h2>Our Approach</h2>
         </div>
-        <div class="service-item animate-fade-in">
-          <div class="service-text">
-            <h3>Learn</h3>
-            <p>Hands-on courses designed to build real-world skills.</p>
+        <div class="services-grid">
+          <div class="service-item animate-fade-in">
+            <div class="service-text">
+              <h3>Learn</h3>
+              <p>Hands-on courses designed to build real-world skills.</p>
+            </div>
           </div>
-          <div class="service-image">
-            <div class="placeholder-image">Image Placeholder</div>
-          </div>
-        </div>
-        <div class="service-item reverse animate-fade-in">
-          <div class="service-text">
-            <h3>Build</h3>
-            <p>Create impactful projects with expert guidance.</p>
-          </div>
-          <div class="service-image">
-            <div class="placeholder-image">Image Placeholder</div>
+          <div class="service-item animate-fade-in">
+            <div class="service-text">
+              <h3>Build</h3>
+              <p>Create impactful projects with expert guidance.</p>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Contact Section -->
       <section id="contact" class="contact">
-        <div class="section-header animate-fade-in">
+        <div class="contact-content animate-fade-in">
           <h2>Contact Us</h2>
-          <p>Get in touch with our team.</p>
-        </div>
-        <div class="contact-form animate-fade-in">
-          <form id="contact-form">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" required placeholder="Your Name" />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                required
-                placeholder="Your Email"
-              />
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea
-                id="message"
-                required
-                placeholder="Your Message"
-              ></textarea>
-            </div>
-            <button type="submit" class="btn">Send Message</button>
-          </form>
+          <p>Let’s connect and bring your tech journey to life.</p>
+          <div class="contact-form">
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required placeholder="Your Name" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  placeholder="Your Email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  required
+                  placeholder="Your Message"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
         </div>
       </section>
     </main>
 
+    <!-- Footer Section -->
     <footer>
-      <p>© 2025 Tech Academy. All rights reserved.</p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#schools">Courses</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="schools.html">Schools</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <ul>
+            <li>
+              <a href="https://twitter.com/techacademy" target="_blank"
+                >Twitter</a
+              >
+            </li>
+            <li>
+              <a href="https://linkedin.com/company/techacademy" target="_blank"
+                >LinkedIn</a
+              >
+            </li>
+            <li>
+              <a href="https://instagram.com/techacademy" target="_blank"
+                >Instagram</a
+              >
+            </li>
+            <li>
+              <a href="https://facebook.com/techacademy" target="_blank"
+                >Facebook</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Us</h4>
+          <ul>
+            <li>
+              <a href="mailto:info@techacademy.com">info@techacademy.com</a>
+            </li>
+            <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+            <li><a href="#contact">Contact Form</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Tech Academy. All rights reserved.</p>
+      </div>
     </footer>
 
     <script src="script.js"></script>

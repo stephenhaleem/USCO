@@ -13,24 +13,15 @@ body {
   font-family: "Open Sans", sans-serif;
   line-height: 1.6;
   color: #333;
-  background: #f9f9f9;
+  background: #000000;
 }
 
 /* Header */
 header {
-  background: #fff;
-  padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+  background: #000000;
 
-/* Header */
-header {
-  background: #fff;
-  padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -56,13 +47,13 @@ nav ul li {
 }
 
 nav a {
-  color: #333;
+  color: #fff;
   text-decoration: none;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
+  font-family: "Anton", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
   padding: 0.5rem 1rem;
-  border-radius: 20px;
+  border-radius: 25px;
   transition: background 0.3s, color 0.3s;
 }
 
@@ -77,42 +68,170 @@ nav a:hover {
 }
 
 .nav-logo img {
-  width: 7cap;
-  height: 70px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-/* Responsive Design */
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 3px;
+  background: #8a4af3;
+  transition: all 0.3s ease;
+}
+
+/* Close Button */
+.close-btn {
+  display: none;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 3rem;
+  color: #8a4af3; /* Yellow-orange to match the links */
+  cursor: pointer;
+  z-index: 101;
+}
+.nav-links.active ~ .close-btn {
+  display: block;
+}
+
+/* Hide Hamburger When Active */
+.nav-links.active ~ .hamburger {
+  display: none;
+}
+
+/* Mobile Navigation */
 @media (max-width: 768px) {
-  nav ul li {
-    margin: 0 0.5rem;
+  .hamburger {
+    display: flex;
+    color: #fff;
   }
 
-  nav a {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #000; /* Black background to match the image */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 100;
   }
 
-  .nav-logo img {
-    width: 30px;
-    height: 30px;
+  .nav-links.active {
+    transform: translateX(0);
+  }
+
+  .nav-links li {
+    margin: 1.5rem 0;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .nav-links li a {
+    color: #8a4af3; /* Yellow-orange text to match the image */
+    font-size: 1.5rem;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .nav-links li a:hover {
+    background: none;
+    color: #8a4af3; /* Lighter yellow-orange on hover */
+  }
+  .nav-links li a:active {
+    background: none;
+    color: #fff; /* Lighter yellow-orange on hover */
+  }
+
+  /* Hide the close button by default */
+  .close-btn {
+    display: none;
+  }
+  .nav-links.active + .hamburger {
+    display: none;
+  }
+
+  /* Show the close button only when the nav menu is active */
+  .nav-links.active ~ .close-btn {
+    display: block;
+  }
+  .hamburger.active {
+    transform: translateX(0);
+  }
+  body:has(.nav-links.active) .hamburger {
+    display: none;
+  }
+  /* Nth-Child Animations for Mobile Menu */
+  .nav-links.active li:nth-child(1) {
+    animation: slideIn 0.5s ease forwards 0.1s;
+  }
+
+  .nav-links.active li:nth-child(2) {
+    animation: slideIn 0.5s ease forwards 0.2s;
+  }
+
+  .nav-links.active li:nth-child(3) {
+    animation: slideIn 0.5s ease forwards 0.3s;
+  }
+
+  .nav-links.active li:nth-child(4) {
+    animation: slideIn 0.5s ease forwards 0.4s;
+  }
+
+  .nav-links.active li:nth-child(5) {
+    animation: slideIn 0.5s ease forwards 0.5s;
+  }
+
+  .nav-links.active li:nth-child(6) {
+    animation: slideIn 0.5s ease forwards 0.6s;
+  }
+
+  .nav-links.active li:nth-child(7) {
+    animation: slideIn 0.5s ease forwards 0.7s;
   }
 }
 
-/* Hero Section (Home) with Parallax */
+/* Slide-In Animation */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Hero Section */
 .hero {
   position: relative;
-  height: 600px;
-  background: linear-gradient(to right, #4b2e83, #8a4af3);
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
+  height: 700px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  margin-bottom: -100px;
 }
 
 .hero::before {
@@ -122,38 +241,45 @@ nav a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("images/10_bechgron.jpg") no-repeat center center;
-  background-attachment: fixed;
+  background: url("images/liquid-marbling-paint-texture-background-fluid-painting-abstract-texture-intensive-color-mix-wallpaper.webp")
+    no-repeat center center;
   background-size: cover;
-  z-index: 0;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
   color: #fff;
+  padding: 2rem;
 }
 
-.hero h2 {
-  font-family: "Poppins", sans-serif;
-  font-size: 3.5rem;
+.hero h1 {
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  font-size: 4.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .hero p {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
+}
+
+.hero-btn {
+  font-size: 1.2rem;
+  padding: 1rem 2.5rem;
 }
 
 /* Animations */
 .animate-fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateY(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 .animate-fade-in.visible {
@@ -162,207 +288,235 @@ nav a:hover {
 }
 
 /* Stats Section */
-.stats-rounded {
-  background: #fff;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  margin: 0;
-  padding: 3rem 1rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+.stats {
+  position: relative;
+  background: #000000;
+  padding: 4rem 1rem;
+  margin: 0 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 
-.stats {
+.stats-container {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
   flex-wrap: wrap;
 }
 
-.stats-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.stats-header img {
-  max-width: 200px;
-  height: auto;
-  margin-top: 1rem;
-}
-
 .stat-card {
-  background: #f9f9f9;
+  background: #000000;
   padding: 2rem;
   text-align: center;
-  border-radius: 10px;
-  width: 200px;
+  border-radius: 15px;
+  width: 220px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-10px) rotate(2deg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .stat-card h3 {
-  font-family: "Poppins", sans-serif;
-  font-size: 2.5rem;
+  font-family: "Anton", sans-serif;
+  font-size: 2.8rem;
   font-weight: 700;
   color: #6b48ff;
   margin-bottom: 0.5rem;
 }
 
 .stat-card p {
-  font-size: 1rem;
-  color: #666;
+  font-size: 1.1rem;
+  color: #fff;
 }
 
-/* Schools Section (Updated Courses) */
+/* Schools Section */
 .schools {
   max-width: 1200px;
-  margin: 3rem auto;
-  padding: 3rem 1rem;
-  background: linear-gradient(135deg, #f5f5ff 0%, #ffffff 100%);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin: 4rem auto;
+  padding: 4rem 1rem;
+  background: #000000;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   position: relative;
-}
-
-.schools::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background: #6b48ff;
-  border-radius: 2px;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .schools h2 {
-  font-family: "Poppins", sans-serif;
-  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-family: "Anton", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 1rem;
+  color: #fff;
 }
 
 .schools p {
   text-align: center;
-  color: #666;
-  margin-bottom: 2rem;
+  color: #8a4af3;
+  font-size: 1.2rem;
 }
 
-.schools-list {
+.schools-grid {
   display: grid;
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
 }
 
 .school-card {
-  background: #fff;
+  background-color: #000000;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
+  border: 2px solid transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
 }
 
 .school-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 2px solid #6b48ff;
 }
 
 .school-card h3 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Anton", sans-serif;
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: #6b48ff;
+  text-transform: uppercase;
+  color: #8a4af3;
 }
 
 .school-card p {
-  color: #666;
+  color: #d8d8d8;
   margin-bottom: 1.5rem;
 }
 
 /* About Section */
 .about {
   max-width: 1200px;
-  margin: 3rem auto;
-  padding: 3rem 1rem;
+  margin: 4rem auto;
+  padding: 4rem 1rem;
   background: #fff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-.about::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background: #6b48ff;
-  border-radius: 2px;
-}
-
-.about h2 {
-  font-family: "Poppins", sans-serif;
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.about > p {
-  text-align: center;
-  color: #666;
-  margin-bottom: 2rem;
+.about-content {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .mission {
+  flex: 1;
+  min-width: 300px;
+  padding: 3rem;
+  background: #000000; /* Dark background to match the image */
+  border-radius: 15px;
   text-align: center;
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: #f5f5ff;
-  border-radius: 10px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Curved gradient accent (simulating the swoosh) */
+.mission::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 300px;
+  background: linear-gradient(45deg, #ff4d94, #6b48ff);
+  border-radius: 50%;
+  transform: translate(50%, -50%) rotate(45deg);
+  z-index: 0;
 }
 
 .mission h3 {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+  text-align: left;
+  font-family: "Anton", sans-serif;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+.mission-top {
+  text-align: left;
+  display: block;
+  font-size: 4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.mission-main {
+  text-align: left;
+  display: block;
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  /* Adding a subtle texture effect */
+  filter: contrast(1.2) brightness(1.1);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.mission-bottom {
+  text-align: left;
+  display: block;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #e0e0e0;
+  letter-spacing: 1px;
 }
 
 .team {
-  margin-top: 2rem;
+  flex: 1;
+  min-width: 300px;
+  padding: 2rem;
 }
 
 .team h3 {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.8rem;
-  text-align: center;
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  font-size: 5rem;
+  text-align: right;
+  word-wrap: break-word;
   margin-bottom: 2rem;
+  color: #000000;
 }
 
 .team-grid {
   display: grid;
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
 }
 
 .team-member {
   background: #fff;
   padding: 1.5rem;
-  border-radius: 10px;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .team-member:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .team-image {
@@ -387,115 +541,114 @@ nav a:hover {
 /* Services Section */
 .services {
   max-width: 1200px;
-  margin: 3rem auto;
-  padding: 3rem 1rem;
-  background: linear-gradient(135deg, #f5f5ff 0%, #ffffff 100%);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin: 4rem auto;
+  padding: 4rem 1rem;
+  background: #000000; /* Dark background to match the "Our Mission" section */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   position: relative;
+  overflow: hidden;
 }
 
+/* Curved gradient accent (simulating the swoosh) */
 .services::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background: #6b48ff;
-  border-radius: 2px;
+  right: 0;
+  width: 150px;
+  height: 300px;
+  background: linear-gradient(45deg, #ff4d94, #6b48ff);
+  border-radius: 50%;
+  transform: translate(50%, -50%) rotate(45deg);
+  z-index: 0;
 }
 
 .services h2 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 3rem;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .service-item {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
-  padding: 1.5rem;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  background: #000000; /* Slightly lighter dark background for contrast */
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.service-item.reverse {
-  flex-direction: row-reverse;
-}
-
-.service-text {
-  flex: 1;
-  min-width: 300px;
+.service-item:hover {
+  transform: translateY(-5px) rotate(2deg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .service-text h3 {
-  font-family: "Poppins", sans-serif;
-  font-size: 2rem;
+  font-family: "Anton", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
   margin-bottom: 1rem;
+  /* Adding a subtle texture effect */
+  filter: contrast(1.2) brightness(1.1);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.service-image {
-  flex: 1;
-  min-width: 300px;
-}
-
-.placeholder-image {
-  background: #ddd;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  border-radius: 10px;
+.service-text p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.1rem;
+  color: #e0e0e0;
 }
 
 /* Contact Section */
 .contact {
   max-width: 1200px;
-  margin: 3rem auto;
-  padding: 3rem 1rem;
-  background: #fff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  position: relative;
+  margin: 4rem auto;
+  padding: 4rem 1rem;
+  background: #000000;
+  border-radius: 20px;
+  color: #fff;
+  text-align: center;
 }
 
-.contact::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background: #6b48ff;
-  border-radius: 2px;
+.contact-content {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .contact h2 {
-  font-family: "Poppins", sans-serif;
-  font-size: 2.5rem;
-  text-align: center;
+  font-family: "Anton", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
-.contact > p {
-  text-align: center;
-  color: #666;
+.contact p {
+  font-size: 1.2rem;
   margin-bottom: 2rem;
 }
 
 .contact-form {
-  max-width: 600px;
-  margin: 0 auto;
   padding: 2rem;
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .contact-form form {
@@ -547,9 +700,10 @@ nav a:hover {
 .schools-list,
 .blog-list {
   display: grid;
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
   max-width: 1200px;
-  margin: 3rem auto;
+  margin: 4rem auto;
   padding: 0 1rem;
 }
 
@@ -558,16 +712,19 @@ nav a:hover {
 .blog-list h2 {
   font-family: "Poppins", sans-serif;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 2rem;
+  color: #333;
 }
 
 .project-card,
 .school-card,
 .blog-post {
-  background: #f9f9f9;
+  background: #fff;
   padding: 1.5rem;
-  border-radius: 10px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -575,11 +732,9 @@ nav a:hover {
 .school-card:hover,
 .blog-post:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-.project-card h3,
-.school-card h3,
 .blog-post h3 {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
@@ -595,35 +750,94 @@ nav a:hover {
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background: #6b48ff;
+  background: linear-gradient(135deg, #6b48ff, #8a4af3);
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  margin-top: 1rem;
-  transition: background 0.3s ease, transform 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn:hover {
-  background: #5a3de6;
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(107, 72, 255, 0.3);
 }
 
-/* Footer */
+/* Footer Section */
 footer {
+  background: #000; /* Pure black background to match the "Our Schools" section */
+  padding: 3rem 1rem;
+  color: #fff;
+  border-top: 1px solid #333; /* Subtle divider to separate from main content */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section {
   text-align: center;
-  padding: 2rem;
-  background: #f4f4f4;
-  color: #666;
+}
+
+.footer-section h4 {
+  font-family: "Anton", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  display: flex; /* Arrange links horizontally */
+  flex-direction: row;
+  flex-wrap: wrap; /* Allow wrapping if there are too many links */
+  justify-content: center; /* Center the links */
+  gap: 1rem; /* Space between links */
+}
+
+.footer-section li {
+  margin: 0; /* Remove vertical margin since links are horizontal */
+}
+
+.footer-section a {
+  color: #6b48ff; /* Purple links to match the "Our Schools" section */
+  text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #8a4af3; /* Lighter purple on hover */
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #333;
+}
+
+.footer-bottom p {
+  font-family: "Anton", sans-serif;
+  color: #e0e0e0; /* Light gray for the copyright notice */
+  font-size: 0.9rem;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero {
-    height: 400px;
+    height: 500px;
   }
 
-  .hero h2 {
-    font-size: 2rem;
+  .hero h1 {
+    font-size: 2.5rem;
   }
 
   .hero p {
@@ -631,8 +845,7 @@ footer {
   }
 
   .stats {
-    flex-direction: column;
-    align-items: center;
+    margin: 0 1rem;
   }
 
   .stat-card {
@@ -640,12 +853,16 @@ footer {
     max-width: 300px;
   }
 
-  .schools-list,
+  .schools-grid,
   .team-grid,
   .project-list,
   .schools-list,
   .blog-list {
     grid-template-columns: 1fr;
+  }
+
+  .about-content {
+    flex-direction: column;
   }
 
   .service-item,
@@ -660,5 +877,10 @@ footer {
   nav a {
     font-size: 0.9rem;
     padding: 0.3rem 0.8rem;
+  }
+
+  .nav-logo img {
+    width: 30px;
+    height: 30px;
   }
 }
